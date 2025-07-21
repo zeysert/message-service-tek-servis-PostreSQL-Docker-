@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: messagedb
+    ports:
+      - "5432:5432"
+
+  message-service:
+    build: .
+    container_name: message-service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
